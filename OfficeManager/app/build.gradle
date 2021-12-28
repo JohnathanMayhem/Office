@@ -75,6 +75,7 @@ dependencies {
     // Room database
     implementation "androidx.room:room-runtime:2.3.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
     kapt "androidx.room:room-compiler:2.3.0"
 
     // Kotlin Extensions and Coroutines support for Room
@@ -128,4 +129,7 @@ dependencies {
 
     // Date
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+
+    //Crop photoes
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 }

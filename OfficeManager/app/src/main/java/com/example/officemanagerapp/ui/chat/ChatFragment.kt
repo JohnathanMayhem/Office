@@ -50,7 +50,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                 mRefChats =Firebase.database.reference.child("chats").child(model.name)
                 mRefChatsListener = AppValueEventListener {
                     val chat = it.getChat()
-                    holder.name.text = chat.name
+                    holder.name.text = chat.nameRus
                     holder.itemView.setOnClickListener{
                         val action = ChatFragmentDirections.actionChatFragmentToSingleChatFragment(chat)//не понимаю как заменить один фрагмент другим передав в него параметр
                         findNavController().navigate(action)

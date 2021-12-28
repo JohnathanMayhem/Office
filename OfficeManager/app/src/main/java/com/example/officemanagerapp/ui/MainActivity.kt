@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
     private fun loginInFirebase(){
-        val login = "Test2@gmail.com"
+        val login = "Test1@gmail.com"
         val password = "Password"
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(login, password)
             .addOnCompleteListener {
@@ -114,10 +114,20 @@ class MainActivity : AppCompatActivity() {
                     return@addOnCompleteListener
                 }
             }
+
         FirebaseAuth.getInstance().signInWithEmailAndPassword(login, password)
             .addOnSuccessListener {
                 val uid = FirebaseAuth.getInstance().uid ?: ""
-                val user = UserFirebase(login, uid)
+                val user = UserFirebase(
+                    login,
+                    uid,
+                    "Алексей",
+                    "Алексеев",
+                    "Алексеевич",
+                    "89999999999",
+                    "*********",
+                    "421",
+                    "4")
                 val my_rev = FirebaseDatabase.getInstance().getReference("users/$uid")
                 my_rev.setValue(user)
                 Log.d("AAA", "success")

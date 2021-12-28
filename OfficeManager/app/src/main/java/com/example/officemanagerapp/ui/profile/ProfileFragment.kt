@@ -16,12 +16,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel by viewModels<ProfileViewModel>()
 
+    //lateinit var
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentProfileBinding.bind(view)
-        binding.progressbar.visible(false)
 
-        /*viewModel.getUser()
+
+        /*binding = FragmentProfileBinding.bind(view)
+        binding.progressbar.visible(false)
+        viewModel.getUser()
 
         viewModel.user.observe(viewLifecycleOwner) {
             when (it) {
@@ -38,9 +41,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         }*/
 
-        binding.btnLogOut.setOnClickListener {
+        /*binding.btnLogOut.setOnClickListener {
             logout()
-        }
+        }*/
     }
 
     // TODO(What I need to show?)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.officemanagerapp.R
 import com.google.firebase.auth.ktx.auth
@@ -16,9 +17,11 @@ import java.util.*
 
 class SingleChatAdapter: RecyclerView.Adapter<SingleChatAdapter.SingeChatHolder>(){
 
-    private var listMessageCache = emptyList<Message>()
-
+    private var listMessageCache = mutableListOf<Message>()
+    private lateinit var mDifResult: DiffUtil.DiffResult
     class SingeChatHolder(view: View): RecyclerView.ViewHolder(view){
+        //val layout_mesaage: ConstraintLayout = view.message
+
         val blocUserMessage: ConstraintLayout = view.block_user_massege
         val chatUSerMessage: TextView = view.chat_user_message
         val chatUSerMessageTime: TextView = view.chat_user_message_time
@@ -36,6 +39,8 @@ class SingleChatAdapter: RecyclerView.Adapter<SingleChatAdapter.SingeChatHolder>
 
     override fun onBindViewHolder(holder: SingeChatHolder, position: Int) {
         if (listMessageCache[position].from == Firebase.auth.currentUser!!.uid){
+            //var padd = holder.chatRecievedMessage.paddingLeft
+            //holder.layout_mesaage.setPadding(padd*10, padd/10, padd/3, padd/10);
             holder.blocUserMessage.visibility = View.VISIBLE
             holder.blocRecievedMessage.visibility=View.GONE
             holder.chatUSerMessage.text=listMessageCache[position].text
@@ -54,8 +59,35 @@ class SingleChatAdapter: RecyclerView.Adapter<SingleChatAdapter.SingeChatHolder>
 
 
     fun setList(list: List<Message>){
-        listMessageCache = list
-        notifyDataSetChanged()
+        //notifyDataSetChanged()
+    }
+    fun addItem(item: Message,
+                toBottom: Boolean,
+                onSuccess:() -> Unit){
+        if (toBottom) {
+            if (!listMessageCache.contains(item)) {
+                listMessageCache.add(item)
+                notifyItemInserted(listMessageCache.size)
+            }
+        }
+        else{
+            if (!listMessageCache.contains(item)){
+                listMessageCache.add(item)
+                listMessageCache.sortBy { it.timeSTAMP.toString() }
+                notifyItemInserted(0)
+            }
+        }
+        onSuccess()
+
+        /*val newList = mutableListOf<Message>()
+        newList.addAll(listMessageCache)
+
+        if (!newList.contains(item)) newList.add(item)
+
+        newList.sortBy { it.timeSTAMP.toString() }
+        mDifResult = DiffUtil.calculateDiff(DiffUtilCalback(listMessageCache, newList))
+        mDifResult.dispatchUpdatesTo(this)
+        listMessageCache = newList*/
     }
 }
 private fun String.asTime(): String{

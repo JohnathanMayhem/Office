@@ -2,22 +2,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/app_margin"
-    style="@style/settingsButtons"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/primaryWhite"
+    android:layout_marginBottom="1dp"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/chat_icon"
         android:layout_width="@dimen/settings_user_photo_width"
         android:layout_height="@dimen/settings_btn_change_photo_height"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:src="@drawable/default_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/chat_name"
         style="@style/normalText"
         tools:text="Yura Petrov"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@id/chat_icon"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
